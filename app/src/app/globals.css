@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: var(--t-bg);
+  --color-bg-2: var(--t-bg-2);
+  --color-bg-3: var(--t-bg-3);
+  --color-bg-card: var(--t-bg-card);
+  --color-border: var(--t-border);
+  --color-border-hover: var(--t-border-hover);
+  --color-text: var(--t-text);
+  --color-text-2: var(--t-text-2);
+  --color-text-3: var(--t-text-3);
+  --color-accent: var(--t-accent);
+  --color-accent-2: var(--t-accent-2);
+  --color-accent-dark: var(--t-accent-dark);
+  --color-accent-glow: var(--t-accent-glow);
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+/* Dark theme (default) */
+:root {
+  --t-bg: #0a0a0a;
+  --t-bg-2: #0f0f0f;
+  --t-bg-3: #161616;
+  --t-bg-card: rgba(255, 255, 255, 0.03);
+  --t-border: rgba(255, 255, 255, 0.08);
+  --t-border-hover: rgba(255, 255, 255, 0.16);
+  --t-text: #ffffff;
+  --t-text-2: rgba(255, 255, 255, 0.55);
+  --t-text-3: rgba(255, 255, 255, 0.3);
+  --t-accent: #ffffff;
+  --t-accent-2: #d4d4d4;
+  --t-accent-dark: rgba(255, 255, 255, 0.08);
+  --t-accent-glow: rgba(255, 255, 255, 0.12);
+  --t-btn-bg: #ffffff;
+  --t-btn-text: #000000;
+  --t-invert: 0;
+}
+
+/* Light theme — white inversion */
+:root[data-theme="light"] {
+  --t-bg: #ffffff;
+  --t-bg-2: #f7f7f7;
+  --t-bg-3: #efefef;
+  --t-bg-card: rgba(0, 0, 0, 0.025);
+  --t-border: rgba(0, 0, 0, 0.07);
+  --t-border-hover: rgba(0, 0, 0, 0.14);
+  --t-text: #111111;
+  --t-text-2: rgba(0, 0, 0, 0.5);
+  --t-text-3: rgba(0, 0, 0, 0.3);
+  --t-accent: #111111;
+  --t-accent-2: #444444;
+  --t-accent-dark: rgba(0, 0, 0, 0.05);
+  --t-accent-glow: rgba(0, 0, 0, 0.06);
+  --t-btn-bg: #111111;
+  --t-btn-text: #ffffff;
+  --t-invert: 1;
+  --t-overlay: rgba(255, 255, 255, 0.6);
+  --t-card-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  --t-hero-stroke: rgba(0,0,0,0.1);
+  --t-particle-color: rgba(0,0,0,0.06);
+  --t-play-bg: rgba(0,0,0,0.1);
+  --t-play-border: rgba(0,0,0,0.15);
+  --t-placeholder-l1: 88%;
+  --t-placeholder-l2: 82%;
+}
+
+/* Dark theme extras */
+:root {
+  --t-overlay: rgba(0, 0, 0, 0.35);
+  --t-card-shadow: none;
+  --t-hero-stroke: rgba(255,255,255,0.15);
+  --t-particle-color: rgba(255,255,255,0.06);
+  --t-play-bg: rgba(255,255,255,0.15);
+  --t-play-border: rgba(255,255,255,0.25);
+  --t-placeholder-l1: 10%;
+  --t-placeholder-l2: 18%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--t-accent);
+  color: var(--t-btn-text);
+  -webkit-text-fill-color: var(--t-btn-text);
+}
+
+/* Smooth scroll via Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Reveal animation base */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Text split animation */
+.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Magnetic button */
+.magnetic-wrap {
+  display: inline-flex;
+}
+
+/* Glass effect */
+.glass {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass:hover {
+  border-color: var(--color-border-hover);
+}
+
+/* Gradient text */
+/* Float animation for hero badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--t-accent), var(--t-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Theme-aware button */
+.btn-primary {
+  background: var(--t-btn-bg);
+  color: var(--t-btn-text);
+}
+
+/* Theme-aware card */
+.theme-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--t-card-shadow);
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.theme-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--t-card-shadow), 0 4px 12px rgba(0,0,0,0.03);
+}
+
+/* Light theme scrollbar */
+:root[data-theme="light"] ::-webkit-scrollbar-track { background: var(--t-bg); }
+:root[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+:root[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.18); }
+
+/* Light theme — softer nav */
+:root[data-theme="light"] .nav-scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Smooth theme transition on everything */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.4s;
+  transition-timing-function: ease;
+}
+
+/* Exclude animations from theme transition */
+.no-theme-transition,
+[class*="animate-"],
+[class*="transition-transform"],
+[class*="transition-opacity"] {
+  transition-property: transform, opacity;
+}
